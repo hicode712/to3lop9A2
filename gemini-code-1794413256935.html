@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dự Án STEM: Ngôi Nhà Chống Lũ - Tổ 3 - Lớp 9A2 | THCS Đoàn Thị Điểm</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;       /* Xanh dương đậm chủ đạo */
+            --primary-mid: #2563eb;   /* Xanh dương trung gian */
+            --primary-light: #eff6ff; /* Nền xanh nhạt */
+            --accent: #0284c7;        /* Xanh điểm nhấn */
+            --text-main: #0f172a;     /* Chữ chính đậm rõ */
+            --text-muted: #475569;    /* Chữ phụ */
+            --bg-body: #f8fafc;       /* Nền trang */
+            --bg-card: #ffffff;       /* Nền thẻ */
+            --border: #e2e8f0;        /* Viền mảnh */
+            --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+            --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.65;
+        }
+
+        /* Thanh điều hướng cố định (Sticky Navbar) */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+        }
+
+        .nav-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.95rem;
+            letter-spacing: 0.2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.25rem;
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-mid);
+        }
+
+        /* Phần đầu trang (Hero Header) */
+        header {
+            background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 3.25rem 1.5rem 2.75rem;
+            text-align: center;
+        }
+
+        .school-badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary-mid);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.4rem 1.1rem;
+            border-radius: 999px;
+            margin-bottom: 1rem;
+            border: 1px solid #bfdbfe;
+        }
+
+        header h1 {
+            font-size: 2.4rem;
+            color: var(--primary);
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        header .slogan {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        header .subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* Bố cục khung chính */
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 2.5rem 1.25rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 70px;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .step-num {
+            background: var(--primary);
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* KHUNG 1 ẢNH DUY NHẤT: SẢN PHẨM HOÀN THIỆN */
+        .showcase-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero-image-box {
+            width: 100%;
+            min-height: 420px;
+            max-height: 560px;
+            background: var(--primary-light);
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-image-box img {
+            width: 100%;
+            height: 100%;
+            max-height: 560px;
+            object-fit: contain;
+            background: #0f172a;
+            display: block;
+        }
+
+        /* Tự động ẩn thẻ img nếu chưa dán link */
+        .hero-image-box img[src=""] {
+            display: none;
+        }
+
+        /* Tự động ẩn dòng chữ nhắc nhở ngay khi ĐÃ dán link ảnh vào src */
+        .hero-image-box img:not([src=""]) + .placeholder-label {
+            display: none;
+        }
+
+        .placeholder-label {
+            color: var(--text-muted);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .placeholder-label strong {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 0.35rem;
+        }
+
+        /* 4 Điểm nhấn chi tiết bên dưới ảnh chính (thay cho ảnh phụ) */
+        .highlights-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 0.85rem;
+            margin-top: 1.25rem;
+        }
+
+        .highlight-pill {
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+        }
+
+        .highlight-pill strong {
+            display: block;
+            font-size: 0.92rem;
+            color: var(--primary);
+        }
+
+        .highlight-pill span {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+        }
+
+        /* Lưới 2 cột cho Ý tưởng & Thiết kế */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.6rem;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .check-list {
+            list-style: none;
+        }
+
+        .check-list li {
+            position: relative;
+            padding-left: 1.6rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .check-list li::before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: 800;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Danh sách vật liệu */
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .material-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem 1.15rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .material-item strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.98rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .material-item span {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        /* Quy trình 5 bước */
+        .steps-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 1rem;
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--primary-mid);
+            border-radius: 10px;
+            padding: 1.2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .step-card .badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary-mid);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+
+        /* Khung thuyết trình & Thông điệp */
+        .presentation-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .presentation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .pres-item {
+            padding: 0.75rem 1rem;
+            background: var(--bg-body);
+            border-radius: 8px;
+            font-size: 0.93rem;
+        }
+
+        .pres-item strong {
+            color: var(--primary);
+        }
+
+        .message-banner {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0284c7 100%);
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .message-banner span {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.85;
+            margin-bottom: 0.5rem;
+        }
+
+        .message-banner p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.75rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        @media (max-width: 640px) {
+            header h1 { font-size: 1.8rem; }
+            .hero-image-box { min-height: 280px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- THANH ĐIỀU HƯỚNG NHANH -->
+    <nav>
+        <div class="nav-inner">
+            <div class="nav-brand">STEM 4 • Tổ 3 – Lớp 9A2</div>
+            <ul class="nav-links">
+                <li><a href="#san-pham">Sản phẩm</a></li>
+                <li><a href="#y-tuong">Ý tưởng & Thiết kế</a></li>
+                <li><a href="#vat-lieu">Vật liệu</a></li>
+                <li><a href="#quy-trinh">Quy trình</a></li>
+                <li><a href="#thuyet-trinh">Thuyết trình</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- PHẦN ĐẦU TRANG (HEADER) -->
+    <header>
+        <div class="school-badge">Chủ đề STEM 4 • Tổ 3 – Lớp 9A2 – Trường THCS Đoàn Thị Điểm</div>
+        <h1>Mô Hình Ngôi Nhà Chống Lũ</h1>
+        <p class="slogan">“Sáng tạo hôm nay – Cuộc sống an toàn hơn ngày mai!”</p>
+        <p class="subtitle">
+            Sản phẩm kết hợp các giải pháp kỹ thuật phòng chống ngập lụt thực tiễn và mã QR tuyên truyền an toàn cộng đồng.
+        </p>
+    </header>
+
+    <main class="container">
+
+        <!-- KHU VỰC DUY NHẤT 1 ẢNH SẢN PHẨM HOÀN THIỆN -->
+        <section id="san-pham">
+            <h2 class="section-title">
+                <span class="step-num">★</span> Sản Phẩm Hoàn Thiện
+            </h2>
+            <div class="showcase-card">
+                
+                <div class="hero-image-box">
+                    <!-- ================================================================= -->
+                    <!-- DÁN DUY NHẤT 1 LINK ẢNH SẢN PHẨM HOÀN THIỆN VÀO TRONG src="" DƯỚI ĐÂY -->
+                    <!-- ================================================================= -->
+                    <img src="" alt="Mô hình Ngôi nhà chống lũ hoàn thiện - Tổ 3 Lớp 9A2">
+                    
+                    <div class="placeholder-label">
+                        <strong>[ Khung hiển thị Ảnh Sản Phẩm Hoàn Thiện ]</strong>
+                        <span>Chèn link ảnh vào thuộc tính <code>src=""</code> ở dòng 291 để hiển thị hình</span>
+                    </div>
+                </div>
+
+                <!-- Tóm tắt 4 chi tiết kỹ thuật nổi bật trên mô hình bằng thẻ chữ gọn gàng -->
+                <div class="highlights-bar">
+                    <div class="highlight-pill">
+                        <strong>Phao nổi bằng chai nhựa</strong>
+                        <span>Tạo lực đẩy giúp nền nhà nổi khi nước dâng</span>
+                    </div>
+                    <div class="highlight-pill">
+                        <strong>Bể chứa nước trên cao</strong>
+                        <span>Dự trữ nước sinh hoạt sạch trong mùa lũ</span>
+                    </div>
+                    <div class="highlight-pill">
+                        <strong>Thuyền cứu hộ dân dụng</strong>
+                        <span>Phương tiện di chuyển khẩn cấp khi ngập sâu</span>
+                    </div>
+                    <div class="highlight-pill">
+                        <strong>Bảng tuyên truyền & Mã QR</strong>
+                        <span>Cung cấp kiến thức phòng tránh lũ lụt</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PHẦN 1 & 2: Ý TƯỞNG VÀ THIẾT KẾ MÔ HÌNH -->
+        <section id="y-tuong" class="grid-2">
+            <div class="card">
+                <h2 class="section-title">
+                    <span class="step-num">1</span> Xác Định Ý Tưởng
+                </h2>
+                <ul class="check-list">
+                    <li>Đảm bảo ngôi nhà an toàn khi mực nước lũ dâng cao.</li>
+                    <li>Áp dụng các giải pháp kỹ thuật phù hợp, vững chắc.</li>
+                    <li>Sử dụng vật liệu tái chế đơn giản, dễ tìm kiếm.</li>
+                    <li>Có tính thực tiễn cao, gần gũi với địa phương.</li>
+                    <li>Trang trí hài hòa và tích hợp mã QR tuyên truyền phòng, tránh lũ lụt.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2 class="section-title">
+                    <span class="step-num">2</span> Thiết Kế & Giải Pháp Kỹ Thuật
+                </h2>
+                <ul class="check-list">
+                    <li><strong>Kết cấu nhà sàn cao & cột trụ chắc chắn:</strong> Cố định vị trí và nâng cao mặt sàn sinh hoạt.</li>
+                    <li><strong>Hệ thống nền nổi bằng phao:</strong> Kết hợp chai nhựa và xốp giúp giảm rủi ro ngập sàn.</li>
+                    <li><strong>Mái dốc thoát nước tốt:</strong> Chống đọng nước mưa, bố trí kèm tấm pin mặt trời.</li>
+                    <li><strong>Khu vực an toàn & phụ trợ:</strong> Tầng tránh lũ trên cao, cầu thang, thuyền cứu hộ, bể nước và lương thực.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PHẦN 3: CHUẨN BỊ VẬT LIỆU -->
+        <section id="vat-lieu">
+            <h2 class="section-title">
+                <span class="step-num">3</span> Chuẩn Bị Vật Liệu
+            </h2>
+            <div class="materials-grid">
+                <div class="material-item">
+                    <strong>Bìa Carton</strong>
+                    <span>Làm nền, vách tường và mái nhà</span>
+                </div>
+                <div class="material-item">
+                    <strong>Que gỗ, thanh tre</strong>
+                    <span>Làm hệ thống cột trụ và khung nhà</span>
+                </div>
+                <div class="material-item">
+                    <strong>Nắp chai, chai nhựa</strong>
+                    <span>Làm hệ thống phao nổi và bể chứa nước</span>
+                </div>
+                <div class="material-item">
+                    <strong>Xốp, mút xốp</strong>
+                    <span>Làm phao trợ lực và phần nền nổi</span>
+                </div>
+                <div class="material-item">
+                    <strong>Keo nến, băng dính, kéo, thước</strong>
+                    <span>Dụng cụ đo đạc, cắt ghép và cố định</span>
+                </div>
+                <div class="material-item">
+                    <strong>Giấy màu, sơn, cây mô hình</strong>
+                    <span>Trang trí cảnh quan, bảng nhắc và mã QR</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHẦN 4: QUY TRÌNH THỰC HIỆN -->
+        <section id="quy-trinh">
+            <h2 class="section-title">
+                <span class="step-num">4</span> Tiến Hành Làm Mô Hình
+            </h2>
+            <div class="steps-list">
+                <div class="step-card">
+                    <span class="badge">Bước 1</span>
+                    <p>Làm nền và dựng khung nhà bằng bìa carton, que gỗ.</p>
+                </div>
+                <div class="step-card">
+                    <span class="badge">Bước 2</span>
+                    <p>Hoàn thiện sàn, tường, mái dốc và lắp cầu thang.</p>
+                </div>
+                <div class="step-card">
+                    <span class="badge">Bước 3</span>
+                    <p>Lắp đặt giải pháp chống lũ: phao nổi, cột cao, bể chứa, thuyền.</p>
+                </div>
+                <div class="step-card">
+                    <span class="badge">Bước 4</span>
+                    <p>Trang trí cảnh quan xung quanh (cây xanh, hàng rào, biển báo).</p>
+                </div>
+                <div class="step-card">
+                    <span class="badge">Bước 5</span>
+                    <p>Kiểm tra hoàn thiện, dán mã QR và bảng tuyên truyền.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHẦN 5: TÓM TẮT NỘI DUNG THUYẾT TRÌNH -->
+        <section id="thuyet-trinh">
+            <h2 class="section-title">
+                <span class="step-num">5</span> Nội Dung Giới Thiệu Sản Phẩm
+            </h2>
+            <div class="presentation-box">
+                <div class="presentation-grid">
+                    <div class="pres-item">
+                        <strong>1. Tên sản phẩm:</strong> Mô hình Ngôi nhà chống lũ (Tổ 3 – 9A2).
+                    </div>
+                    <div class="pres-item">
+                        <strong>2. Ý tưởng & Thông điệp:</strong> Sáng tạo giải pháp sống an toàn, chủ động trước thiên tai.
+                    </div>
+                    <div class="pres-item">
+                        <strong>3. Giải pháp kỹ thuật:</strong> Kết hợp nhà sàn trụ cao, hệ thống phao nổi chai nhựa và mái dốc.
+                    </div>
+                    <div class="pres-item">
+                        <strong>4. Cơ chế hoạt động:</strong> Nhà cao tránh ngập, phao nâng đỡ, thoát nước nhanh và dự trữ nước sạch.
+                    </div>
+                    <div class="pres-item">
+                        <strong>5. Lợi ích thực tiễn:</strong> Bảo vệ tính mạng, tài sản và giảm thiểu thiệt hại cho cộng đồng.
+                    </div>
+                    <div class="pres-item">
+                        <strong>6. Lời kêu gọi:</strong> Chung tay chủ động phòng, tránh lũ lụt vì cuộc sống an toàn.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THÔNG ĐIỆP SẢN PHẨM -->
+        <section>
+            <div class="message-banner">
+                <span>Thông điệp sản phẩm</span>
+                <p>“Chủ động phòng tránh lũ lụt – Bảo vệ cuộc sống – Cùng xây dựng cộng đồng an toàn hơn!”</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CHÂN TRANG (FOOTER) -->
+    <footer>
+        Dự án STEM Chủ đề 4: Ngôi Nhà Chống Lũ • Thực hiện bởi <strong>Tổ 3 – Lớp 9A2 – Trường THCS Đoàn Thị Điểm</strong>
+    </footer>
+
+</body>
+</html>
